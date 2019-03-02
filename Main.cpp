@@ -378,19 +378,17 @@ int main(int argc, char *argv[]) {
         window.draw(fullscreen_rect, renderBlur);
       }
 
-      //Apply chaos and draw
+      //Smooth out the stepping speed.
       const int steps = steps_per_frame;
       const double delta = delta_per_step * speed_mult;
       rolling_delta = rolling_delta*0.99 + delta*0.01;
 
+      //Apply chaos
       for (int step = 0; step < steps; ++step) {
         bool isOffScreen = true;
         double x = t;
         double y = t;
 
-        sf::CircleShape point;
-        point.setRadius(0.5f);
-        point.setOrigin(point.getRadius(), point.getRadius());
         for (int iter = 0; iter < iters; ++iter) {
           const double xx = x * x;
           const double yy = y * y;
